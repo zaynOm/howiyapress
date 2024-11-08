@@ -1,5 +1,5 @@
-import 'package:app/features/data/apis/posts_service.dart';
-import 'package:app/features/domain/entities/post.dart';
+import 'package:app/features/data/data_sources/posts_service.dart';
+import 'package:app/features/domain/entities/paginated_posts.dart';
 import 'package:app/features/domain/repositories/post_repo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -14,7 +14,7 @@ class PostRepoImpl extends PostRepo {
   PostRepoImpl(this.postsService);
 
   @override
-  Future<List<Post>> getPosts({int page = 0}) async {
+  Future<PaginatedPosts> getPosts(int page) async {
     return await postsService.getPosts(page);
   }
 }
