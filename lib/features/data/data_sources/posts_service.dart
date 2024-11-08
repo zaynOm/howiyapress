@@ -20,9 +20,7 @@ class PostsServiceImpl implements PostsService {
   PostsServiceImpl(this.dio);
   @override
   Future<PaginatedPosts> getPosts(int page) async {
-    final response = await dio.get(
-        'https://howiyapress.com/wp-json/wp/v2/posts',
-        queryParameters: {'page': page});
+    final response = await dio.get('/posts', queryParameters: {'page': page});
 
     List<PostModel> posts =
         (response.data as List).map((e) => PostModel.fromJson(e)).toList();
