@@ -1,5 +1,5 @@
-import 'package:app/features/domain/entities/post.dart';
+import 'package:app/features/domain/entities/paginated_posts.dart';
 
 abstract class PostRepo {
-  Future<List<Post>> getPosts({int page});
+  Future<PaginatedPosts> getPosts(int page);
 }
