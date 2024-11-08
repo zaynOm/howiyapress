@@ -1,4 +1,4 @@
-import 'package:app/features/data/repositories/post_repo_impl.dart';
+import 'package:app/features/presentation/providers/pagination_state.dart';
 import 'package:app/features/presentation/widgets/group_selection.dart';
 import 'package:app/features/presentation/widgets/news_card.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +21,9 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final postRepo = ref.watch(postRepoImplProvider);
+    final paginationState = ref.watch(paginationProvider);
+    final paginationNotifier = ref.read(paginationProvider.notifier);
+
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.only(top: 50.0),
@@ -52,38 +54,39 @@ class HomePage extends ConsumerWidget {
                   );
                 },
               ),
-              FutureBuilder(
-                future: postRepo.getPosts(),
-                builder: (context, snapshot) {
-                  final data = snapshot.data;
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      heightFactor: 15,
-                      child: CircularProgressIndicator(),
-                    );
-                  }
-                  if (snapshot.hasError) {
-                    debugPrint(snapshot.toString());
-                    return const Center(
-                      child: Text("Error Loading Data"),
-                    );
-                  }
-                  if (data == null) return const Center(child: Text("No Data"));
+              paginationState.when(
+                loading: () => const Center(
+                  child: CircularProgressIndicator(),
+                ),
+                error: (error, stackTrace) {
+                  debugPrint(error.toString());
+                  debugPrint(stackTrace.toString());
+                  return Center(
+                    child: Text('Error Loading Data $error'),
+                  );
+                },
+                data: (state) {
                   return Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(
                         left: 20.0,
                         right: 20.0,
-                        bottom: 20.0,
                       ),
                       child: ListView.separated(
                         shrinkWrap: true,
-                        itemCount: data.length,
-                        separatorBuilder: (context, index) => const SizedBox(
-                          height: 20.0,
-                        ),
+                        itemCount: state.items.length + (state.hasMore ? 1 : 0),
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 20.0),
                         itemBuilder: (context, index) {
-                          return NewsCard(post: data[index]);
+                          if (index < state.items.length) {
+                            return NewsCard(post: state.items[index]);
+                          } else {
+                            // WidgetsBinding.instance.addPostFrameCallback((_) {
+                            paginationNotifier.loadNextPage();
+                            // });
+                          }
+                          return const Center(
+                              child: CircularProgressIndicator());
                         },
                       ),
                     ),
