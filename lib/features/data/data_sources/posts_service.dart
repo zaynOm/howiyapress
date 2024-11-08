@@ -20,6 +20,7 @@ class PostsServiceImpl implements PostsService {
   PostsServiceImpl(this.dio);
   @override
   Future<PaginatedPosts> getPosts(int page) async {
+    debugPrint('****************************GetPosts was called: $page');
     final response = await dio.get('/posts', queryParameters: {'page': page});
 
     List<PostModel> posts =
@@ -27,13 +28,20 @@ class PostsServiceImpl implements PostsService {
 
     final totalPages = response.headers['x-wp-totalpages']?.first;
 
+    Stopwatch stopwatch = Stopwatch()..start();
+
+    debugPrint('****************************Before for loop');
     // Fetch and update each post with its image URL
     for (int i = 0; i < posts.length; i++) {
       final postId = posts[i].featuredMedia;
       final imageUrl = await getImageUrl(postId);
       posts[i] = posts[i].copyWith(imageUrl: imageUrl);
     }
+    debugPrint('****************************After for loop');
 
+    stopwatch.stop();
+    debugPrint(
+        '****************************GetPosts took: ${stopwatch.elapsedMilliseconds} ms');
     return PaginatedPosts(
         posts: posts,
         currentPage: page,
