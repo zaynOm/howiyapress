@@ -32,16 +32,21 @@ class PostsServiceImpl implements PostsService {
 
     debugPrint('****************************Before for loop');
     // Fetch and update each post with its image URL
-    for (int i = 0; i < posts.length; i++) {
-      final postId = posts[i].featuredMedia;
-      final imageUrl = await getImageUrl(postId);
-      posts[i] = posts[i].copyWith(imageUrl: imageUrl);
-    }
+
+    // Fetch and update each post with its image URL in parallel
+    final updatedPosts = await Future.wait(posts.map((post) async {
+      final imageUrl = await getImageUrl(post.featuredMedia);
+      return post.copyWith(imageUrl: imageUrl);
+    }));
+
+// Replace the original list with the updated one
+    posts = updatedPosts;
     debugPrint('****************************After for loop');
 
     stopwatch.stop();
     debugPrint(
         '****************************GetPosts took: ${stopwatch.elapsedMilliseconds} ms');
+
     return PaginatedPosts(
         posts: posts,
         currentPage: page,
