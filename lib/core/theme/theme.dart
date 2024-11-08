@@ -8,6 +8,12 @@ class AppTheme {
     appBarTheme: const AppBarTheme(
       backgroundColor: AppPalette.backgroundColor,
     ),
+    colorScheme: const ColorScheme.light(
+      primary: AppPalette.primaryColor,
+      secondary: AppPalette.primaryColor,
+      surfaceBright: AppPalette.backgroundColor,
+      surface: AppPalette.backgroundColor,
+    ),
     fontFamily: 'Cairo',
   );
 }
