@@ -30,7 +30,7 @@ class NewsCard extends StatelessWidget {
                 end: Alignment.bottomCenter,
                 colors: [
                   Colors.transparent,
-                  AppPalette.foregroundColor.withOpacity(0.7),
+                  AppPalette.foregroundColor.withOpacity(0.9),
                 ],
               )),
             ),
