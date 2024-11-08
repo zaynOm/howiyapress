@@ -1,6 +1,6 @@
 import 'package:app/core/data/remote/dio_network.dart';
-import 'package:app/features/data/models/post.dart';
-import 'package:app/features/domain/entities/post.dart';
+import 'package:app/features/data/models/post_model.dart';
+import 'package:app/features/domain/entities/paginated_posts.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -10,7 +10,7 @@ final postsServiceImplProvider = Provider<PostsService>((ref) {
 });
 
 abstract interface class PostsService {
-  Future<List<Post>> getPosts(int page);
+  Future<PaginatedPosts> getPosts(int page);
   Future<String> getImageUrl(String mediaId);
 }
 
@@ -19,7 +19,7 @@ class PostsServiceImpl implements PostsService {
 
   PostsServiceImpl(this.dio);
   @override
-  Future<List<Post>> getPosts(int page) async {
+  Future<PaginatedPosts> getPosts(int page) async {
     final response = await dio.get(
         'https://howiyapress.com/wp-json/wp/v2/posts',
         queryParameters: {'page': page});
@@ -27,15 +27,19 @@ class PostsServiceImpl implements PostsService {
     List<PostModel> posts =
         (response.data as List).map((e) => PostModel.fromJson(e)).toList();
 
+    final totalPages = response.headers['x-wp-totalpages']?.first;
+
     // Fetch and update each post with its image URL
     for (int i = 0; i < posts.length; i++) {
       final postId = posts[i].featuredMedia;
       final imageUrl = await getImageUrl(postId);
       posts[i] = posts[i].copyWith(imageUrl: imageUrl);
     }
-    // posts.forEach((post) { });
 
-    return posts;
+    return PaginatedPosts(
+        posts: posts,
+        currentPage: page,
+        totalPages: int.parse(totalPages.toString()));
   }
 
   @override
