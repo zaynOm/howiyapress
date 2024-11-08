@@ -33,6 +33,9 @@ class HomePage extends ConsumerWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              // search bar
+              // dismiss keyboard when tapped outside the text field
+
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 20.0),
                 child: TextField(
@@ -46,6 +49,7 @@ class HomePage extends ConsumerWidget {
                 ),
               ),
               const SizedBox(height: 20.0),
+              // categories
               CategoriesButtonGroup(
                 options: categories,
                 onSelect: (index) {
@@ -54,20 +58,21 @@ class HomePage extends ConsumerWidget {
                   );
                 },
               ),
-              paginationState.when(
-                loading: () => const Center(
-                  child: CircularProgressIndicator(),
-                ),
-                error: (error, stackTrace) {
-                  debugPrint(error.toString());
-                  debugPrint(stackTrace.toString());
-                  return Center(
-                    child: Text('Error Loading Data $error'),
-                  );
-                },
-                data: (state) {
-                  return Expanded(
-                    child: Padding(
+              // news cards list
+              Expanded(
+                child: paginationState.when(
+                  loading: () => const Center(
+                    child: CircularProgressIndicator(),
+                  ),
+                  error: (error, stackTrace) {
+                    debugPrint(error.toString());
+                    debugPrint(stackTrace.toString());
+                    return Center(
+                      child: Text('Error Loading Data $error'),
+                    );
+                  },
+                  data: (state) {
+                    return Padding(
                       padding: const EdgeInsets.only(
                         left: 20.0,
                         right: 20.0,
@@ -89,9 +94,9 @@ class HomePage extends ConsumerWidget {
                               child: CircularProgressIndicator());
                         },
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ],
           ),
