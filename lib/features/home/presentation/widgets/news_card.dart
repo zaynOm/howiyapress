@@ -1,7 +1,7 @@
 import 'package:app/core/common/entities/post.dart';
 import 'package:app/core/theme/app_palette.dart';
+import 'package:app/core/utils/unescape.dart';
 import 'package:flutter/material.dart';
-import 'package:html_unescape/html_unescape.dart';
 
 class NewsCard extends StatelessWidget {
   final Post post;
@@ -9,7 +9,6 @@ class NewsCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final unescape = HtmlUnescape();
     return GestureDetector(
       onTap: () => print('pressed'),
       child: ClipRRect(
