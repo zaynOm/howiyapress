@@ -1,6 +1,6 @@
 import 'package:app/core/data/remote/dio_network.dart';
-import 'package:app/features/data/models/post_model.dart';
-import 'package:app/features/domain/entities/paginated_posts.dart';
+import 'package:app/features/home/data/models/post_model.dart';
+import 'package:app/features/home/domain/entities/paginated_posts.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

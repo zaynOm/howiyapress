@@ -1,6 +1,6 @@
-import 'package:app/features/data/data_sources/posts_service.dart';
-import 'package:app/features/domain/entities/paginated_posts.dart';
-import 'package:app/features/domain/repositories/post_repo.dart';
+import 'package:app/features/home/data/data_sources/posts_service.dart';
+import 'package:app/features/home/domain/entities/paginated_posts.dart';
+import 'package:app/features/home/domain/repositories/post_repo.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final postRepoImplProvider = Provider<PostRepo>((ref) {

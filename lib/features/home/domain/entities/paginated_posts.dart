@@ -1,4 +1,4 @@
-import 'package:app/features/domain/entities/post.dart';
+import 'package:app/features/home/domain/entities/post.dart';
 
 class PaginatedPosts {
   final List<Post> posts;

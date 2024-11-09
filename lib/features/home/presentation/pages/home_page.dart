@@ -1,6 +1,6 @@
-import 'package:app/features/presentation/providers/pagination_state.dart';
-import 'package:app/features/presentation/widgets/group_selection.dart';
-import 'package:app/features/presentation/widgets/news_card.dart';
+import 'package:app/features/home/presentation/providers/pagination_state.dart';
+import 'package:app/features/home/presentation/widgets/group_selection.dart';
+import 'package:app/features/home/presentation/widgets/news_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

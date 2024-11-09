@@ -1,4 +1,4 @@
-import 'package:app/features/domain/entities/paginated_posts.dart';
+import 'package:app/features/home/domain/entities/paginated_posts.dart';
 
 class PaginatedPostsModel extends PaginatedPosts {
   PaginatedPostsModel({

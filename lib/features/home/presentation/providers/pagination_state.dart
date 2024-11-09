@@ -1,5 +1,5 @@
-import 'package:app/features/data/repositories/post_repo_impl.dart';
-import 'package:app/features/domain/entities/post.dart';
+import 'package:app/features/home/data/repositories/post_repo_impl.dart';
+import 'package:app/features/home/domain/entities/post.dart';
 import 'package:flutter/material.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
