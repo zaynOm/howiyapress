@@ -1,6 +1,7 @@
 import 'package:app/core/common/entities/post.dart';
 import 'package:app/core/theme/app_palette.dart';
 import 'package:app/core/utils/unescape.dart';
+import 'package:app/features/post/presentation/pages/post_page.dart';
 import 'package:flutter/material.dart';
 
 class NewsCard extends StatelessWidget {
@@ -10,7 +11,8 @@ class NewsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => print('pressed'),
+      onTap: () => Navigator.push(context,
+          MaterialPageRoute(builder: (context) => PostPage(post: post))),
       child: ClipRRect(
         borderRadius: BorderRadius.circular(20),
         child: SizedBox(
