@@ -1,5 +1,5 @@
+import 'package:app/core/common/entities/post.dart';
 import 'package:app/core/theme/app_palette.dart';
-import 'package:app/features/home/domain/entities/post.dart';
 import 'package:flutter/material.dart';
 import 'package:html_unescape/html_unescape.dart';
 
