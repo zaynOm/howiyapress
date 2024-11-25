@@ -81,7 +81,7 @@ class HomePage extends ConsumerWidget {
                         shrinkWrap: true,
                         itemCount: state.items.length + (state.hasMore ? 1 : 0),
                         separatorBuilder: (context, index) =>
-                            const SizedBox(height: 20.0),
+                            const SizedBox(height: 10.0),
                         itemBuilder: (context, index) {
                           if (index < state.items.length) {
                             return NewsCard(post: state.items[index]);

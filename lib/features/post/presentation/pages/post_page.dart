@@ -1,7 +1,7 @@
 import 'package:app/core/common/entities/post.dart';
 import 'package:app/core/utils/unescape.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class PostPage extends StatelessWidget {
   final Post post;

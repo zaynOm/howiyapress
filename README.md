@@ -8,3 +8,6 @@
 - [ ] add filter by category
 - [ ] add internet check
 - [ ] add local storage for offline usage
+- [ ] use safe area in the home page
+- [ ] add on pull refresh
+- [ ] add iFrame video reader (fix flutter_widget_from_html)
