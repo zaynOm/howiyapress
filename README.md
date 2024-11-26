@@ -1,3 +1,12 @@
+# [HowiyaPress](https://howiyapress.com)
+
+"HowiyaPress" is a Moroccan electronic newspaper that is updated around the clock, providing you with purposeful media with an integrated vision.
+
+![Splash screen](/repo_media/Splash.png)
+![Splash screen](/repo_media/Home.png)
+![Splash screen](</repo_media/Home(1).png>)
+![Splash screen](/repo_media/Post.png)
+
 - [ ] dismiss keyboard when tapped outside the text field
 - [x] fix the for loop delay, call fetch all images in parallel
   - [ ] stream each item after it's image is loaded - stream the images
